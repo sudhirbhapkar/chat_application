@@ -29,6 +29,7 @@ It took almost 2 and 30 mins to complete
     CREATE USER ‘giftogram'@‘localhost' IDENTIFIED BY 'StrongPassword!';
     GRANT ALL PRIVILEGES ON chat_application.* TO 'giftogram'@'localhost';
     ```
+4. databaase name: chat_application, user: giftogram, host: localhost
 4. Once all set up. We can run the application using command `yarn local:run` created to always start with fresh code.
 5. This will start the application on `http://localhost:3000`
 6. We can call below endpoints
@@ -84,8 +85,38 @@ It took almost 2 and 30 mins to complete
     }
     ```
 
+### Database table schema
 
+#### users table
+```
+CREATE TABLE `users` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+```
+
+#### messages table
+
+```
+CREATE TABLE `messages` (
+  `message_id` int NOT NULL AUTO_INCREMENT,
+  `sender_user_id` int NOT NULL,
+  `receiver_user_id` int NOT NULL,
+  `message` text NOT NULL,
+  `epoch` int NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`message_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+```
 
 
 
